@@ -1,6 +1,6 @@
-Advent of Code 2018
+Advent of Code 2019
 
-You'll need Nim installed. 
+You'll need Nim installed.
 
 To run:
 nim compile --run dayX.nim

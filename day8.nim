@@ -5,13 +5,13 @@ import strformat
 ### Type definitions
 ###
 
-const 
+const
     width = 25
     height = 6
     imageSize = 25 * 6
     Black = 0
     White = 1
-    Trnsp = 2 
+    Trnsp = 2
 
 ###
 ### Type procedures
@@ -28,14 +28,14 @@ proc countDigits(layer: string): (int, int, int) =
         d2 = 0
     for c in layer:
         case c
-        of '0': 
+        of '0':
             d0 += 1
-        of '1': 
+        of '1':
             d1 += 1
         of '2':
             d2 += 1
         else:
-            discard 
+            discard
 
     return (d0, d1, d2)
 

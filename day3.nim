@@ -21,10 +21,10 @@ proc addWire(panel: var PanelX, w: int16, x: int, y: int): int =
     # echo "Adding wire at ", x, ", ", y, ". Has ", panel[x][y].len, " wire."
     return panel[x][y].len
 
-proc distance(point: Point): int = 
+proc distance(point: Point): int =
     abs(0 - point.x) + abs(0 - point.y)
 
-proc `<`(p1: Point, p2: Point): bool = 
+proc `<`(p1: Point, p2: Point): bool =
     p1.distance < p2.distance
 
 proc sum(wcd: WireCrossDist): int =
@@ -42,20 +42,20 @@ proc readInput(): seq[string] =
     while not f.endOfFile():
         let line = f.readLine()
         lines.add(line)
-        
+
     return lines
 
 var panel = PanelX()
 
 proc walkWire(wid: int16, wire: string, action: proc) =
-    var 
+    var
         x = 0
         y = 0
         t = 0
     for move in wire.split(','):
         let amount = move[1..<move.len].parseInt - 1
         let direction = move[0]
-        
+
         for i in 0..amount:
             case direction
             of 'R': x += 1
@@ -97,7 +97,7 @@ proc distCrosses(w: int16, x, y, t: int) =
         # echo "wid=", w, ", x=", x, ", y=", y, ", t=", t
         let key = (x, y).Point
         discard crossDists.hasKeyOrPut(key, (-1, -1))
-        
+
         case w
         of 0: crossDists[key][0] = t
         of 1: crossDists[key][1] = t

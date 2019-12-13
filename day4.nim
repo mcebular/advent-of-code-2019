@@ -34,7 +34,7 @@ proc hasIncreasing(num: int): bool =
 
     return hasInc
 
-proc getDigitGroups(num: int): seq[string] = 
+proc getDigitGroups(num: int): seq[string] =
     let numstr = &"{num}x"
     var groups: seq[string] = @["", "", ""]
 
@@ -48,7 +48,7 @@ proc getDigitGroups(num: int): seq[string] =
             g = false
             groups[gi] &= numstr[i-1]
             gi += 1
-    
+
     return groups
 
 
@@ -59,7 +59,7 @@ proc hasDoubleGroup(num: int): bool =
     for group in groups:
         if group.len == 2:
             isOk = true
-    
+
     return isOk
 
 ###
@@ -69,7 +69,7 @@ proc hasDoubleGroup(num: int): bool =
 let (in1, in2) = readInput()
 
 var num = in1 + 1
-var 
+var
     cnt1 = 0
     cnt2 = 0
 while num < in2:
@@ -79,17 +79,17 @@ while num < in2:
         # i.e. if we are at 500_000 we can skip to 550_000
         num += 10_000
         continue
-    
+
     if (numstr[1]&"").parseInt > (numstr[2]&"").parseInt:
         # i.e. if we are at 150_000 we can skip to 155_000
         num += 1_000
         continue
-    
+
     if (numstr[2]&"").parseInt > (numstr[3]&"").parseInt:
         # i.e. if we are at 115_000 we can skip to 115_500
         num += 100
         continue
-    
+
     if (numstr[3]&"").parseInt > (numstr[4]&"").parseInt:
         # i.e. if we are at 111_500 we can skip to 111_550
         num += 10
@@ -103,5 +103,5 @@ while num < in2:
     num += 1
     # echo num
 
-echo cnt1 # Part 1 
+echo cnt1 # Part 1
 echo cnt2 # Part 2

@@ -14,7 +14,7 @@ const
     Halt = true
     Wait = false
 
-const 
+const
     opAdd = 1
     opMul = 2
     opInp = 3
@@ -49,7 +49,7 @@ proc opSize(op: Operation): int =
 ### Utility procedures
 ###
 
-proc charToInt(c: char): int = 
+proc charToInt(c: char): int =
     return (c&"").parseInt
 
 # Split the operation into parameter modes and operation itself
@@ -127,7 +127,7 @@ proc runProgram(program: var seq[int], ip: var int, inputs: seq[int], debug: boo
     if program[ip] == opEnd:
         if debug: echo "Program halted."
         state = Halt
-    
+
     if debug: echo ip, ", ", program
     return (state, outputs)
 
@@ -147,7 +147,7 @@ for opcode in split(input, ','):
 ###
 
 ###
-### Type definitions 
+### Type definitions
 ###
 type Amplifier = ref object of RootObj
     program: seq[int]
@@ -176,12 +176,12 @@ proc part1() =
         # initialize amplifiers
         for i in 0..<amplifiers.len:
             amplifiers[i] = newAmplifier(program)
-        
+
         # initialize data
-        var 
+        var
             currentData: int = 0
             currentState: State = Wait
-            
+
         for i in 0..<amplifiers.len:
             # echo &"Thruster {i} starting..."
             discard amplifiers[i].process(phases[i])
@@ -190,13 +190,13 @@ proc part1() =
             if outputs.len > 0:
                 currentData = outputs[0]
             # echo &"Thruster {i} stopped"
-        
+
         if currentData > maxData:
             maxData = currentData
-        
+
         if not nextPermutation(phases):
             break
-        
+
     echo maxData
 
 ###
@@ -212,9 +212,9 @@ proc part2() =
         # initialize amplifiers
         for i in 0..<amplifiers.len:
             amplifiers[i] = newAmplifier(program)
-        
+
         # initialize data
-        var 
+        var
             currentData: int = 0
             currentState: State = Wait
             isFirstIter = true
@@ -225,14 +225,14 @@ proc part2() =
                 # echo &"Thruster {i} starting..."
                 if isFirstIter:
                     discard amplifiers[i].process(phases[i])
-                
+
                 let (state, outputs) = amplifiers[i].process(currentData)
 
                 currentState = state
                 if outputs.len > 0:
                     currentData = outputs[0]
                 # echo &"Thruster {i} stopped"
-            
+
             isFirstIter = false
             if currentState == Halt:
                 break

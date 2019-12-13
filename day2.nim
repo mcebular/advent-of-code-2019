@@ -1,6 +1,6 @@
 from strutils import parseInt, split
 
-const 
+const
     OpAdd = 1
     OpMul = 2
 

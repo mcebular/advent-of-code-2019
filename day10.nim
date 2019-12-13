@@ -11,22 +11,22 @@ type Vector = tuple[x: int, y: int]
 proc distance(this: Vector, other: Vector): Vector =
     (other.x - this.x, other.y - this.y)
 
-proc gcd(vect: Vector): int = 
+proc gcd(vect: Vector): int =
     if vect.y == 0:
         return vect.x
-    
+
     return gcd((vect.y, vect.x mod vect.y))
 
-proc `/`(this: Vector, n: int): Vector = 
+proc `/`(this: Vector, n: int): Vector =
     (int(this.x / n), int(this.y / n))
 
-proc `-`(this: Vector, other: Vector): Vector = 
+proc `-`(this: Vector, other: Vector): Vector =
     (this.x - other.x, this.y - other.y)
 
-proc angle(this: Vector, other: Vector): float = 
+proc angle(this: Vector, other: Vector): float =
     # make this vector the center of coordinate system
     let point: Vector = this - other
-    
+
     var at = arctan2(float(point.y), float(point.x)) * (180 / math.PI) - 90.0
     if at < 0: at += 360.0
     return at
@@ -59,10 +59,10 @@ proc getVisibleAsteroids(this: Vector, asteroids: seq[Vector]): seq[Vector] =
         let dist = this.distance(other)
         let fact = dist / abs(gcd(dist))
         #echo &"Line of sight from {this} to {other}, distance factor is {fact}."
-        
+
         var isVisible = true
         var temp = other - fact
-        
+
         while temp != this and isVisible:
             #echo &"Checking position {temp} for asteroid..."
             for a in asteroids:
@@ -70,10 +70,10 @@ proc getVisibleAsteroids(this: Vector, asteroids: seq[Vector]): seq[Vector] =
                     isVisible = false
                     break
             temp = temp - fact
-        
+
         if isVisible: visibles.add(other)
     return visibles
-    
+
 
 var maxAmount: int = 0
 var maxAsteroid: Vector

@@ -7,9 +7,9 @@ import tables
 ###
 
 type Operation* = enum
-    Add = 1, 
-    Mul = 2, 
-    Inp = 3, 
+    Add = 1,
+    Mul = 2,
+    Inp = 3,
     Out = 4,
     Jit = 5, # jump-if-true
     Jif = 6, # jump-if-false
@@ -56,16 +56,16 @@ type IntCodeComputer* = ref object of RootObj
 ### Private procedures
 ###
 
-proc charToInt(c: char): int = 
+proc charToInt(c: char): int =
     return (c&"").parseInt
 
 # Split the operation into parameter modes and operation itself
 proc disassembleOperation(op: int): (ParameterMode, ParameterMode, ParameterMode, Operation) =
     let ops = &"{op:05}"
     return (
-        ParameterMode(ops[2].charToInt), 
-        ParameterMode(ops[1].charToInt), 
-        ParameterMode(ops[0].charToInt), 
+        ParameterMode(ops[2].charToInt),
+        ParameterMode(ops[1].charToInt),
+        ParameterMode(ops[0].charToInt),
         Operation(ops.substr(3, 4).parseInt)
         )
 
@@ -80,7 +80,7 @@ proc read(icc: IntCodeComputer, inPtr: int, mode: ParameterMode): int =
         let p = icc.relativeBase + icc.programMemory.getOrDefault(inPtr, 0)
         return icc.programMemory.getOrDefault(p, 0)
 
-proc write(icc: IntCodeComputer, inPtr: int, mode: ParameterMode, value: int) = 
+proc write(icc: IntCodeComputer, inPtr: int, mode: ParameterMode, value: int) =
     case mode
     of Pos:
         icc.programMemory[icc.programMemory.getOrDefault(inPtr, 0)] = value
@@ -108,16 +108,16 @@ proc newIntCodeComputer*(program: seq[int]): IntCodeComputer =
     return icc
 
 
-proc addInput*(icc: IntCodeComputer, newInput: int) = 
+proc addInput*(icc: IntCodeComputer, newInput: int) =
     icc.inputs.add(newInput)
 
-proc readMemory*(icc: IntCodeComputer, position: int): int = 
+proc readMemory*(icc: IntCodeComputer, position: int): int =
     return icc.programMemory[position]
 
-proc setMemory*(icc: IntCodeComputer, position: int, value: int) = 
+proc setMemory*(icc: IntCodeComputer, position: int, value: int) =
     icc.programMemory[position] = value
 
-proc runProgram*(icc: IntCodeComputer, debug: bool = false): (EndState, seq[int]) = 
+proc runProgram*(icc: IntCodeComputer, debug: bool = false): (EndState, seq[int]) =
     # if debug: echo icc.instructionPointer, ", ", icc.programMemory
     var outputs: seq[int] = @[]
     var state: EndState

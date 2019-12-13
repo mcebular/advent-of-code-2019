@@ -18,12 +18,12 @@ proc part1() =
         # initialize amplifiers
         for i in 0..<amplifiers.len:
             amplifiers[i] = newIntCodeComputer(program)
-        
+
         # initialize data
-        var 
+        var
             currentData: int = 0
             currentState: EndState = Wait
-            
+
         for i in 0..<amplifiers.len:
             # echo &"Thruster {i} starting..."
             amplifiers[i].addInput(phases[i])
@@ -31,18 +31,18 @@ proc part1() =
 
             amplifiers[i].addInput(currentData)
             let (state, outputs) = amplifiers[i].runProgram()
-            
+
             currentState = state
             if outputs.len > 0:
                 currentData = outputs[0]
             # echo &"Thruster {i} stopped"
-        
+
         if currentData > maxData:
             maxData = currentData
-        
+
         if not nextPermutation(phases):
             break
-        
+
     echo maxData
 
 ###
@@ -50,7 +50,7 @@ proc part1() =
 ###
 
 proc part2() =
-    var amplifiers: array[5, IntCodeComputer] 
+    var amplifiers: array[5, IntCodeComputer]
 
     var phases: array[5, int] = [5,6,7,8,9]
     var maxData: int = 0
@@ -58,9 +58,9 @@ proc part2() =
         # initialize amplifiers
         for i in 0..<amplifiers.len:
             amplifiers[i] = newIntCodeComputer(program)
-        
+
         # initialize data
-        var 
+        var
             currentData: int = 0
             currentState: EndState = Wait
             isFirstIter = true
@@ -80,7 +80,7 @@ proc part2() =
                 if outputs.len > 0:
                     currentData = outputs[0]
                 # echo &"Thruster {i} stopped"
-            
+
             isFirstIter = false
             if currentState == Halt:
                 break

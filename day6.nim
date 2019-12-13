@@ -29,7 +29,7 @@ proc indirectOrbitsCount(planet: Planet): int =
         cnt += 1
     return cnt
 
-proc pathToComPlanet(planet: Planet): seq[Planet] = 
+proc pathToComPlanet(planet: Planet): seq[Planet] =
     var path: seq[Planet] = @[]
     var orb = planet
     while orb.orbits != nil:

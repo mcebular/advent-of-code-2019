@@ -8,7 +8,7 @@ import strformat
 type Operation = int
 type ParMode = int
 
-const 
+const
     opAdd = 1
     opMul = 2
     opInp = 3
@@ -43,7 +43,7 @@ proc opSize(op: Operation): int =
 ### Utility procedures
 ###
 
-proc charToInt(c: char): int = 
+proc charToInt(c: char): int =
     return (c&"").parseInt
 
 # Split the operation into parameter modes and operation itself
@@ -109,7 +109,7 @@ proc runProgram(program: seq[int], inputs: seq[int], debug: bool = false): seq[i
             echo program
             echo &"Program suprisingly terminated at op {op}."
             break
-        
+
         if not modifiedIp:
             ip += op.opSize
         # echo program

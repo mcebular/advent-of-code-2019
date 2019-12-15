@@ -108,6 +108,18 @@ proc newIntCodeComputer*(program: seq[int]): IntCodeComputer =
     return icc
 
 
+proc clone*(icc: IntCodeComputer): IntCodeComputer =
+    var clone = IntCodeComputer()
+
+    clone.programMemory = newTable[int, int]()
+    for key, value in icc.programMemory:
+        clone.programMemory[key] = value
+
+    clone.instructionPointer = icc.instructionPointer
+    clone.relativeBase = icc.relativeBase
+
+    return clone
+
 proc addInput*(icc: IntCodeComputer, newInput: int) =
     icc.inputs.add(newInput)
 

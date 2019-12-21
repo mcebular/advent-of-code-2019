@@ -1,11 +1,11 @@
-import strutils
+# import strutils
 import tables
-import sequtils
-import strformat
+# import sequtils
+# import strformat
 import heapqueue
 
 
-type Seq2d[T] = ref object of RootObj
+type Seq2d*[T] = ref object of RootObj
     field: seq[T]
     width: int
     default: T
@@ -57,8 +57,11 @@ proc find*[T](s: Seq2d[T], value: T): (int, int) =
             return (x, y)
     return (-1, -1)
 
-proc print*[T](s: Seq2d[T], draw: proc(v: T): string) =
+proc print*[T](s: Seq2d[T], draw: proc(v: T): string = nil) =
     for i, v in s.field:
-        stdout.write(draw(v))
+        if draw != nil:
+            stdout.write(draw(v))
+        else:
+            stdout.write(v)
         if i mod s.width == s.width-1:
             stdout.write('\n')

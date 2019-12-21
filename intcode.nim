@@ -123,6 +123,10 @@ proc clone*(icc: IntCodeComputer): IntCodeComputer =
 proc addInput*(icc: IntCodeComputer, newInput: int) =
     icc.inputs.add(newInput)
 
+proc addInput*(icc: IntCodeComputer, newInputs: string) =
+    for ch in newInputs:
+        icc.inputs.add(int(ch))
+
 proc readMemory*(icc: IntCodeComputer, position: int): int =
     return icc.programMemory[position]
 

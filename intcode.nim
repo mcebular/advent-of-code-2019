@@ -120,8 +120,9 @@ proc clone*(icc: IntCodeComputer): IntCodeComputer =
 
     return clone
 
-proc addInput*(icc: IntCodeComputer, newInput: int) =
-    icc.inputs.add(newInput)
+proc addInput*(icc: IntCodeComputer, inputs: varargs[int]) =
+    for input in inputs:
+        icc.inputs.add(input)
 
 proc addInput*(icc: IntCodeComputer, newInputs: string) =
     for ch in newInputs:

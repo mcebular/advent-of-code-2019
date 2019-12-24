@@ -17,6 +17,12 @@ proc newSeq2d*[T](defaultValue: T): Seq2d[T] =
     s.default = defaultValue
     return s
 
+proc clone*[T](s: Seq2d[T]): Seq2d[T] =
+    let c = newSeq2d(s.default)
+    c.width = s.width
+    c.field = s.field
+    return c
+
 proc width*(s: Seq2d): int =
     return s.width
 
@@ -28,6 +34,9 @@ proc height*(s: Seq2d): int =
 
 proc add*[T](s: Seq2d[T], value: T) =
     s.field.add(value)
+
+proc at*[T](s: Seq2d[T], index: int): T =
+    s.field[index]
 
 proc put*[T](s: Seq2d[T], x, y: int, value: T) =
     let p = x + y * s.width
